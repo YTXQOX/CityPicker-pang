@@ -12,6 +12,9 @@ import com.ljstudio.android.citypicker.widget.CityPicker;
 
 public class MainActivity extends AppCompatActivity {
 
+    private CityPicker cityPicker;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CityPicker cityPicker = new CityPicker.Builder(MainActivity.this).textSize(20)
+                cityPicker = new CityPicker.Builder(MainActivity.this).textSize(20)
                         .titleTextColor("#000000")
                         .backgroundPop(0xa0000000)
                         .province("江苏省")
@@ -51,5 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (cityPicker != null && cityPicker.isShow()) {
+            cityPicker.hide();
+        }
     }
 }

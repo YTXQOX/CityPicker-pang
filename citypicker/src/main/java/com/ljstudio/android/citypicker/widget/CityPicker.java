@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -232,14 +233,21 @@ public class CityPicker implements CanShow, OnWheelChangedListener {
         mTvTitle = (TextView) popview.findViewById(R.id.tv_title);
         mTvCancel = (TextView) popview.findViewById(R.id.tv_cancel);
 
-        popupWindow = new PopupWindow(popview, LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(popview, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        popupWindow = new PopupWindow(context);
+//        popupWindow.setContentView(popview);
+
+//        popupWindow.setBackgroundDrawable(null);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
 //        popupWindow.setBackgroundDrawable(new ColorDrawable(backgroundPop));
-        popupWindow.setBackgroundDrawable(null);
+
         popupWindow.setAnimationStyle(R.style.AnimBottom);
         popupWindow.setTouchable(true);
         popupWindow.setOutsideTouchable(false);
         popupWindow.setFocusable(true);
+//        popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+//        popupWindow.setHeight(ScreenUtil.getScreenHeight(context) * 2 / 5);
+//        popupWindow.showAtLocation(popview, Gravity.BOTTOM, 0 , 0);
 
         setPopupWindowShadow(popupWindow);
 
@@ -257,12 +265,10 @@ public class CityPicker implements CanShow, OnWheelChangedListener {
             mTvTitle.setText(this.mTitle);
         }
 
-
         //设置确认按钮文字颜色
         if (!TextUtils.isEmpty(this.titleTextColorStr)) {
             mTvTitle.setTextColor(Color.parseColor(this.titleTextColorStr));
         }
-
 
         //设置确认按钮文字颜色
         if (!TextUtils.isEmpty(this.confirmTextColorStr)) {
@@ -273,7 +279,6 @@ public class CityPicker implements CanShow, OnWheelChangedListener {
         if (!TextUtils.isEmpty(this.cancelTextColorStr)) {
             mTvCancel.setTextColor(Color.parseColor(this.cancelTextColorStr));
         }
-
 
         //只显示省市两级联动
         if (this.showProvinceAndCity) {
@@ -851,7 +856,7 @@ public class CityPicker implements CanShow, OnWheelChangedListener {
     private void setPopupWindowShadow(PopupWindow popupWindow) {
         //
         WindowManager.LayoutParams lp = ((Activity)context).getWindow().getAttributes();
-        lp.alpha = 0.4f;
+        lp.alpha = 0.45f;
         ((Activity)context).getWindow().setAttributes(lp);
         //
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
